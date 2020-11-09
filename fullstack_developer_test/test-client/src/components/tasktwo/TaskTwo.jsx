@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import dao from '@services/dao';
 
+import {ThemeProvider} from "styled-components";
+import { GlobalStyles } from "../globalStyles";
+import { lightTheme, darkTheme } from "../themes";
+
 // This is a functional component
 
 const TaskTwo = ({ message }) => {
@@ -26,6 +30,11 @@ const TaskTwo = ({ message }) => {
     return { error, isLoaded, data };
   };
 
+  const [theme, setTheme] = useState('light');
+  const themeToggler = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light')
+  }
+
   const [User, setUser] = useState('');
 
   const handleChange = (e) => {
@@ -42,7 +51,13 @@ const TaskTwo = ({ message }) => {
   
   return (
 
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <>
+      <GlobalStyles/>
+
       <div className="task">
+        
+        <button id="toggle" onClick={themeToggler}>Switch Theme</button>
 
         <h1>Task Two</h1>
         <div className="content">
@@ -101,6 +116,9 @@ const TaskTwo = ({ message }) => {
 
           </div>
      </div>
+
+      </>
+    </ThemeProvider>
 
     );
 };
