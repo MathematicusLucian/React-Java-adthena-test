@@ -2,89 +2,107 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import dao from '@services/dao';
 
-const TaskTwo = ({ message }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
-  const [data, setData] = useState(null);
+// This is a functional component
 
-  useEffect(() => {
-    dao.GET(`/api/status?message=${message}`)
+const TaskTwo = ({ message }) => {
+
+  const userApiRequest = url => {
+  
+    const [data, setData] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [error, setError] = useState(null);
+  
+    useEffect(() => {
+      dao.GET(`${url}`)
       .then((res) => {
-        setData(res.message);
-        setHasError(false);
-        setIsLoading(false);
+        setData(res);
+        setIsLoaded(true);
       })
       .catch(() => {
-        setIsLoading(false);
-        setHasError(true);
+        setHasError(error);
       });
-  }, [message]);
+    }, [url]);
+  
+    return { error, isLoaded, data };
+  };
 
-  const exampleApiCall = `Hello ${data}! This message is generated using data from an example api call`;
-  return (
-    <div className="task">
-      {hasError && (<h3>Server error...</h3>)}
-      {isLoading && (<h3>Loading...</h3>)}
-      {data && (
-        <>
-          <h1>Task Two</h1>
-          <div className="content">
-            <h4>Complete the following task:</h4>
-            <p>
-              The task is to create components to fetch public API data, combine it, apply
-              filtering and visualise that data.
-            </p>
-            <p>Include unit tests. Jest is already configured for you in the skeleton project.</p>
-            <p>
-              {exampleApiCall}
-            </p>
-            Expected:
-            <ol type="1">
-              <li>
-                <span>{'Create a new API Resource with a GET endpoint http://localhost:8080/data/todos/{username}.'}</span>
-                <br />
-                <span>
-                  The endpoint should receive a username parameter. Hint:
-                  {' '}
-                  <strong>PathParam</strong>
-                </span>
-                <br />
-                <span>Internally that should use data from the following API endpoints:</span>
-                <ol type="a">
-                  <li>https://jsonplaceholder.typicode.com/users</li>
-                  <li>https://jsonplaceholder.typicode.com/todos</li>
-                </ol>
-              </li>
-              <li>
-                Data fetching should be done with a re-usable data fetching hook.
-              </li>
-              <li>
-                The user interface must accept a username as input.
-              </li>
-              <li>
-                Display the username, email and website of the user.
-              </li>
-              <li>
-                The user interface must handle the case where an error occurs and the case where
-                the requested user is not found.
-              </li>
-              <li>
-                Display a list of Todos for the user.
-              </li>
-              <li>
-                Visualise the Todos in such a way that it is easy to distinguish between the
-                complete and incomplete Todos.
-              </li>
-              <li>
-                Give the user the option of a dark theme for the Todos user interface.
-              </li>
-            </ol>
-            <strong>Feel free to use this component for your implementation.</strong>
-          </div>
-        </>
-      )}
-    </div>
+  const [User, setUser] = useState('');
+
+  const handleChange = (e) => {
+    setUser(e.target.value);
+  }
+
+  const { data, error, isLoaded } = userApiRequest(
+    "http://127.0.0.1:8082/api/todos/" + `${User}`
   );
+
+  if (error !== null) {
+    return <div>Error: {error.message}</div>;
+  }
+  
+  return (
+
+      <div className="task">
+
+        <h1>Task Two</h1>
+        <div className="content">
+
+            <input
+                type="text"
+                placeholder="Type in a user, e.g. Bret"
+                value={User.trim()} 
+                onChange={handleChange}
+            />
+
+            <h2>User Profile</h2>
+
+            <h3 className="userRequested">
+              {User.trim()}
+            </h3>
+
+            {error && (<span>| Server error...</span>)}
+            {!isLoaded && (<span>| Loading...</span>)}
+            {(data.code === 404 || (data.length < 1)) && (
+              <span>User not found</span>
+            )}
+
+            {!data.code && data.length >= 1 && (
+              <>
+                <div>
+                  {data.map((item) => (
+                    <div key={item.id}>
+                      <ul>
+                        <li><strong>User ID:</strong> {item.id}</li>
+                        <li><strong>Email:</strong> {item.email}</li>
+                        <li><strong>Website:</strong> {item.website}</li>
+                      </ul>
+                      <h3>Todo List</h3>
+                      <h4>Complete</h4>
+                      {item.todos
+                        .filter(t => t.completed)
+                        .map((t) => (
+                            <div key={t.id}>
+                              {t.id}: {t.title}
+                            </div>
+                      ))}
+                      <h4>Incomplete</h4>
+                      {item.todos
+                        .filter(t => !t.completed)
+                        .map((t) => (
+                            <div key={t.id}>
+                              {t.id}: {t.title}
+                            </div>
+                      ))}
+                      </div>
+                  ))}
+                </div>
+              </>
+            )}
+
+          </div>
+     </div>
+
+    );
 };
 
 TaskTwo.propTypes = {
