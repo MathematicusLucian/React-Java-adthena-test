@@ -3,7 +3,9 @@ package com.adthena;
 import com.adthena.conf.ApiConfiguration;
 import com.adthena.health.AdthenaHealthCheck;
 import com.adthena.modules.ResourcesModule;
+import com.adthena.resources.AdthenaTodoResource;
 import com.hubspot.dropwizard.guicier.GuiceBundle;
+
 import io.dropwizard.Application;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.setup.Bootstrap;
@@ -16,6 +18,10 @@ public class AdthenaApi extends Application<ApiConfiguration> {
     }
 
     public void run(ApiConfiguration apiConfiguration, Environment environment) throws Exception {
+
+        final AdthenaTodoResource resource = new AdthenaTodoResource();
+        environment.jersey().register(resource);
+
         environment.healthChecks().register("adthena", new AdthenaHealthCheck(apiConfiguration));
     }
 

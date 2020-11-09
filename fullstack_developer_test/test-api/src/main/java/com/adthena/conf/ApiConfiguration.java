@@ -34,7 +34,7 @@ public class ApiConfiguration extends Configuration {
     public void setDefaultMessage(String defaultMessage) {
         this.defaultMessage = defaultMessage;
     }
-
+    
     @JsonProperty
     public String getHealthCheckMessage() {
         return healthCheckMessage;
