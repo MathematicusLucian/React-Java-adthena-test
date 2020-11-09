@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskTwo should render (snapshot) 1`] = `
+<div
+  class="task"
+/>
+`;
+
+exports[`TaskTwo should render correctly in "debug" mode 1`] = `
+<Component
+  theme={
+    Object {
+      "background": "#363537",
+      "body": "#FFF",
+      "text": "#363537",
+      "toggleBorder": "#FFF",
+    }
+  }
+>
+  <Memo(l) />
+  <div
+    className="task"
+  >
+    <button
+      id="toggle"
+      onClick={[Function]}
+    >
+      Switch Theme
+    </button>
+    <h1>
+      Task Two
+    </h1>
+    <div
+      className="content"
+    >
+      <input
+        onChange={[Function]}
+        placeholder="Type in a user, e.g. Bret"
+        type="text"
+        value=""
+      />
+      <h2>
+        User Profile
+      </h2>
+      <h3
+        className="userRequested"
+      />
+      <span>
+        | Loading...
+      </span>
+      <span>
+        User not found
+      </span>
+    </div>
+  </div>
+</Component>
+`;
