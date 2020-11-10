@@ -21,12 +21,11 @@ exports[`TaskTwo should render correctly in "debug" mode 1`] = `
   <div
     className="task"
   >
-    <button
+    <ToggleButton
       id="toggle"
       onClick={[Function]}
-    >
-      Switch Theme
-    </button>
+      theme="Dark"
+    />
     <h1>
       Task Two
     </h1>

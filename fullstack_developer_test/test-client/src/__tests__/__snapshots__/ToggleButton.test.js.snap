@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToggleButton should render correctly in "debug" mode 1`] = `
+<button
+  onClick={[Function]}
+  type="button"
+>
+  Switch theme to 
+  <span>
+    Dark
+  </span>
+</button>
+`;
