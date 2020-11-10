@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodosList should render (snapshot) 1`] = `
+<div
+  class="todoList"
+  todos="[object Object],[object Object],[object Object],[object Object]"
+/>
+`;
+
+exports[`TodosList should render correctly in "debug" mode 1`] = `
+<div
+  className="todoList"
+>
+  <div
+    className="todoItem"
+    key="1"
+  >
+    1
+    : 
+    delectus aut autem
+  </div>
+  <div
+    className="todoItem"
+    key="2"
+  >
+    2
+    : 
+    quis ut nam facilis et officia qui
+  </div>
+  <div
+    className="todoItem"
+    key="3"
+  >
+    3
+    : 
+    fugiat veniam minus
+  </div>
+  <div
+    className="todoItem"
+    key="4"
+  >
+    4
+    : 
+    et porro tempora
+  </div>
+</div>
+`;
