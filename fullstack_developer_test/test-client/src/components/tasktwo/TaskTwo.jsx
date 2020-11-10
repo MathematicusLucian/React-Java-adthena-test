@@ -5,6 +5,7 @@ import dao from '@services/dao';
 import {ThemeProvider} from "styled-components";
 import { GlobalStyles } from "../globalStyles";
 import { lightTheme, darkTheme } from "../themes";
+import TodosList from './TodosList';
 
 // This is a functional component
 
@@ -93,21 +94,15 @@ const TaskTwo = ({ message }) => {
                       </ul>
                       <h3>Todo List</h3>
                       <h4>Complete</h4>
-                      {item.todos
-                        .filter(t => t.completed)
-                        .map((t) => (
-                            <div key={t.id}>
-                              {t.id}: {t.title}
-                            </div>
-                      ))}
+                        <TodosList
+                          todos={item.todos
+                            .filter(t => t.completed)}
+                        />
                       <h4>Incomplete</h4>
-                      {item.todos
-                        .filter(t => !t.completed)
-                        .map((t) => (
-                            <div key={t.id}>
-                              {t.id}: {t.title}
-                            </div>
-                      ))}
+                        <TodosList
+                          todos={item.todos
+                            .filter(t => !t.completed)}
+                        />
                       </div>
                   ))}
                 </div>
