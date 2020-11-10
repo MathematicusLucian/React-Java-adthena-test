@@ -40,14 +40,6 @@ describe('TaskTwo', () => {
     expect(wrapper.find("input").length).toEqual(1);
   });
 
-  it('should render a button tag', () => {
-    expect(wrapper.find('button').exists()).toBe(true);
-  });
-
-  it('should render a button tag - 2', () => {
-    expect(wrapper.find("button").length).toEqual(1);
-  });
-
   it('the default value for the input field should be empty', () => {
     expect(wrapper.find('input').prop('value')).toBe('');
   });
@@ -95,11 +87,11 @@ describe('TaskTwo', () => {
   it('on clicking theme switch button, toggle background colour (is light on load)', () => {
     const fn = jest.fn();
     const wrapper = shallow(<TaskTwo onClick={fn} />);
-    wrapper.find('button').simulate('click');
+    wrapper.find('ToggleButton').simulate('click');
     expect(wrapper.props().theme.background).toEqual("#999");
-    wrapper.find('button').simulate('click');
+    wrapper.find('ToggleButton').simulate('click');
     expect(wrapper.props().theme.background).toEqual("#363537");
-    wrapper.find('button').simulate('click');
+    wrapper.find('ToggleButton').simulate('click');
     expect(wrapper.props().theme.background).toEqual("#999");
   });
 

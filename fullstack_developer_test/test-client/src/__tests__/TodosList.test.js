@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, render, mount } from "enzyme";
+import { shallow, render } from "enzyme";
 import TodosList from './../components/tasktwo/TodosList';
 
 describe('TodosList', () => {
@@ -54,15 +54,15 @@ describe('TodosList', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('task class should exist', () => {;
+  it('should be 1 todoList', () => {
     expect(wrapper.find(".todoList").length).toEqual(1);
   });
 
-  it('task class should exist', () => {;
+  it('should be 4 todoItems', () => {
     expect(wrapper.find(".todoItem").length).toEqual(4);
   });
 
-  it('task class should exist', () => {;
+  it('first todo item should read "1: delectus aut autem"', () => {
     expect(wrapper.find(".todoItem").first().text()).toBe("1: delectus aut autem");
   });
 
