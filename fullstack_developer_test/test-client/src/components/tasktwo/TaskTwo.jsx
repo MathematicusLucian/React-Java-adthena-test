@@ -6,6 +6,7 @@ import {ThemeProvider} from "styled-components";
 import { GlobalStyles } from "../globalStyles";
 import { lightTheme, darkTheme } from "../themes";
 import TodosList from './TodosList';
+import ToggleButton from './ToggleButton';
 
 // This is a functional component
 
@@ -58,8 +59,11 @@ const TaskTwo = ({ message }) => {
 
       <div className="task">
         
-        <button id="toggle" onClick={themeToggler}>Switch Theme</button>
-
+        <ToggleButton id="toggle" 
+          theme={theme === 'light' ? 'Dark' : 'Light'}
+          onClick={themeToggler}
+        />
+        
         <h1>Task Two</h1>
         <div className="content">
 
